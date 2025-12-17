@@ -11,9 +11,16 @@ dotenv.config()
 //     ssl:true,
 // })
 
-const pgClient = new Client(process.env.DS_URL);
+const pgClient = new Client(process.env.DB_URL);
 async function main() {
     await pgClient.connect();
+    const title = "Hello Hllo ";
+    const author = "Deepesh";
+    const price = 1; 
+    const available = false;
+    const queryInsert = `INSERT INTO books(title, author, price, available) VALUES ($1,$2,$3,$4)`
+    // const response = await pgClient.query(queryInsert,[title,author,price,available]);
+
     const response =await pgClient.query("SELECT * FROM books");
     console.log(response.rows);
 }
